@@ -39,6 +39,9 @@ body::before {
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     animation: fadeIn 1.8s;
     z-index: 2;
+
+    /* ✅ SLIGHT ZOOM OUT */
+    transform: scale(0.94);
 }
 
 h1 {
@@ -58,14 +61,13 @@ img {
     animation: zoom 4s infinite;
 }
 
-/* ✅ TEXT – STRONGER ZOOM + FIXED */
+/* TEXT */
 p {
     color: #444;
     font-size: 16px;
     line-height: 1.7;
     animation: textZoom 5s ease-in-out infinite;
     transform-origin: center;
-    will-change: transform;
 }
 
 /* Button */
@@ -91,8 +93,8 @@ button {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px) scale(0.94); }
+    to { opacity: 1; transform: translateY(0) scale(0.94); }
 }
 
 @keyframes zoom {
@@ -101,10 +103,9 @@ button {
     100% { transform: scale(1); }
 }
 
-/* ✅ STRONGER TEXT ZOOM (FIXED & SMOOTH) */
 @keyframes textZoom {
     0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+    50% { transform: scale(1.06); }
     100% { transform: scale(1); }
 }
 
@@ -113,11 +114,11 @@ button {
     to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* MOBILE FIX */
+/* Mobile */
 @media (max-width: 480px) {
     h1 { font-size: 23px; }
-    p { font-size: 15.8px; }
-    img { max-height: 260px; }
+    p { font-size: 15.6px; }
+    img { max-height: 250px; }
 }
 </style>
 </head>
