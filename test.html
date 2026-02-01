@@ -31,10 +31,10 @@ body::before {
 /* Main card */
 .container {
     background: white;
-    width: 90%;
-    max-width: 380px;
-    padding: 22px;
-    border-radius: 20px;
+    width: 92%;
+    max-width: 400px;
+    padding: 24px;
+    border-radius: 22px;
     text-align: center;
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
     animation: fadeIn 1.8s;
@@ -43,36 +43,40 @@ body::before {
 
 h1 {
     color: #ff3d68;
-    margin-bottom: 10px;
-    font-size: 22px;
+    margin-bottom: 12px;
+    font-size: 24px;
 }
 
-/* PHOTO FIX FOR MOBILE */
+/* PHOTO */
 img {
     width: 100%;
     height: auto;
-    max-height: 240px;
+    max-height: 270px;
     object-fit: contain;
-    border-radius: 15px;
-    margin: 15px 0;
+    border-radius: 18px;
+    margin: 18px 0;
     animation: zoom 4s infinite;
 }
 
+/* ✅ TEXT – STRONGER ZOOM + FIXED */
 p {
     color: #444;
-    font-size: 14.5px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
+    animation: textZoom 5s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform;
 }
 
 /* Button */
 button {
-    margin-top: 15px;
-    padding: 12px 25px;
+    margin-top: 18px;
+    padding: 14px 28px;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     background: #ff3d68;
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
 }
 
@@ -93,7 +97,14 @@ button {
 
 @keyframes zoom {
     0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ✅ STRONGER TEXT ZOOM (FIXED & SMOOTH) */
+@keyframes textZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
     100% { transform: scale(1); }
 }
 
@@ -102,19 +113,11 @@ button {
     to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* EXTRA MOBILE POLISH */
+/* MOBILE FIX */
 @media (max-width: 480px) {
-    h1 {
-        font-size: 20px;
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-    img {
-        max-height: 200px;
-    }
+    h1 { font-size: 23px; }
+    p { font-size: 15.8px; }
+    img { max-height: 260px; }
 }
 </style>
 </head>
@@ -178,7 +181,7 @@ setInterval(() => {
     bgIndex = (bgIndex + 1) % backgrounds.length;
 }, 5000);
 
-// MUSIC UNMUTE (Mobile Safe)
+// MUSIC UNMUTE
 window.onload = () => {
     setTimeout(() => {
         const music = document.getElementById("bgMusic");
@@ -193,7 +196,7 @@ setInterval(() => {
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    heart.style.fontSize = (Math.random() * 15 + 18) + "px";
     heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
     document.body.appendChild(heart);
 
