@@ -47,7 +47,7 @@ h1 {
     font-size: 24px;
 }
 
-/* PHOTO – BIGGER & FIXED */
+/* PHOTO */
 img {
     width: 100%;
     height: auto;
@@ -58,11 +58,14 @@ img {
     animation: zoom 4s infinite;
 }
 
-/* TEXT – BIGGER & COMFORTABLE */
+/* ✅ TEXT – STRONGER ZOOM + FIXED */
 p {
     color: #444;
     font-size: 16px;
     line-height: 1.7;
+    animation: textZoom 5s ease-in-out infinite;
+    transform-origin: center;
+    will-change: transform;
 }
 
 /* Button */
@@ -98,28 +101,23 @@ button {
     100% { transform: scale(1); }
 }
 
+/* ✅ STRONGER TEXT ZOOM (FIXED & SMOOTH) */
+@keyframes textZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
 @keyframes float {
     from { transform: translateY(100vh); opacity: 1; }
     to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* MOBILE FIX – KEEP EVERYTHING PERFECT */
+/* MOBILE FIX */
 @media (max-width: 480px) {
-    .container {
-        padding: 26px;
-    }
-
-    h1 {
-        font-size: 23px;
-    }
-
-    p {
-        font-size: 15.8px;
-    }
-
-    img {
-        max-height: 260px;
-    }
+    h1 { font-size: 23px; }
+    p { font-size: 15.8px; }
+    img { max-height: 260px; }
 }
 </style>
 </head>
