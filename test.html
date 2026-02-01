@@ -2,71 +2,97 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Little Sister 💖</title>
 
 <style>
 body {
     margin: 0;
-    height: 100vh;
-    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
+/* Soft overlay - lighter now for visible background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 120, 160, 0.30); /* lighter overlay */
+    z-index: -1;
+}
+
+/* Main card */
 .container {
     background: white;
-    width: 380px;
-    padding: 25px;
-    border-radius: 20px;
+    width: 92%;
+    max-width: 400px;
+    padding: 24px;
+    border-radius: 22px;
     text-align: center;
     box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-    animation: fadeIn 2s;
+    animation: fadeIn 1.8s;
+    z-index: 2;
+    transform: scale(0.88); /* zoomed out for background visibility */
 }
 
 h1 {
     color: #ff3d68;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 24px;
 }
 
+/* PHOTO */
 img {
     width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin: 15px 0;
+    height: auto;
+    max-height: 270px;
+    object-fit: contain;
+    border-radius: 18px;
+    margin: 18px 0;
     animation: zoom 4s infinite;
 }
 
+/* TEXT */
 p {
     color: #444;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
+    animation: textZoom 5s ease-in-out infinite;
+    transform-origin: center;
 }
 
+/* Button */
 button {
-    margin-top: 15px;
-    padding: 12px 25px;
+    margin-top: 18px;
+    padding: 14px 28px;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     background: #ff3d68;
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
 }
 
+/* Floating hearts */
 .heart {
     position: absolute;
     font-size: 22px;
     animation: float 6s linear infinite;
-    color: red;
+    color: #ff2f6d;
+    z-index: 1;
 }
 
+/* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px) scale(0.88); }
+    to { opacity: 1; transform: translateY(0) scale(0.88); }
 }
 
 @keyframes zoom {
@@ -75,18 +101,37 @@ button {
     100% { transform: scale(1); }
 }
 
+@keyframes textZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
 @keyframes float {
     from { transform: translateY(100vh); opacity: 1; }
     to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .container { padding: 26px; }
+    h1 { font-size: 23px; }
+    p { font-size: 15.6px; }
+    img { max-height: 260px; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- MUSIC -->
+<audio id="bgMusic" autoplay loop muted>
+    <source src="Tum Mile.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
     <h1>Happy Birthday 💕</h1>
-    <img id="slide" src="photo1.jpg">
+    <img id="slide" src="photo1.jpeg" alt="Memories">
 
     <p>
         My dear little sister,<br><br>
@@ -103,39 +148,68 @@ button {
 </div>
 
 <script>
+// PHOTO SLIDES
 let photos = [
     "photo1.jpeg",
     "photo2.jpeg",
     "photo3.jpeg",
     "photo6.jpeg",
-    "photo.jpeg",
+    "photo4.jpeg",
     "photo7.jpeg"
 ];
 
 let index = 0;
-
 setInterval(() => {
     index = (index + 1) % photos.length;
     document.getElementById("slide").src = photos[index];
 }, 3000);
 
+// BACKGROUND IMAGES
+let backgrounds = [
+    "photo10.jpeg",
+    "photo11.jpeg",
+    "photo12.jpeg",
+    "photo13.jpeg",
+    "photo14.jpeg",
+    "photo15.jpeg"
+];
+
+let bgIndex = 0;
+setInterval(() => {
+    document.body.style.backgroundImage =
+        `url('${backgrounds[bgIndex]}')`;
+    bgIndex = (bgIndex + 1) % backgrounds.length;
+}, 5000);
+
+// MUSIC UNMUTE
+window.onload = () => {
+    setTimeout(() => {
+        const music = document.getElementById("bgMusic");
+        music.muted = false;
+        music.volume = 0.6;
+    }, 1000);
+};
+
+// HEARTS
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 15 + 18) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+}, 350);
+
+// SURPRISE
 function surprise() {
     alert(
         "You are not just my sister,\n" +
         "you are my heart, my pride, and my forever little baby 💖\n\n" +
         "Happy Birthday 🌸"
     );
-
-    for (let i = 0; i < 40; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 6000);
-    }
 }
 </script>
 
