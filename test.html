@@ -24,62 +24,62 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(255, 120, 160, 0.55);
+    background: rgba(255, 120, 160, 0.4); /* lighter for mobile visibility */
     z-index: -1;
 }
 
 /* Main card */
 .container {
     background: white;
-    width: 90%;
-    max-width: 380px;
-    padding: 22px;
+    width: 85%;
+    max-width: 360px;
+    padding: 18px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-    animation: fadeIn 1.8s;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    animation: fadeIn 1.8s, containerZoom 8s ease-in-out infinite;
     z-index: 2;
 }
 
 h1 {
     color: #ff3d68;
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 20px;
 }
 
-/* PHOTO FIX FOR MOBILE */
+/* PHOTO */
 img {
     width: 100%;
     height: auto;
-    max-height: 240px;
+    max-height: 200px;
     object-fit: contain;
     border-radius: 15px;
-    margin: 15px 0;
+    margin: 12px 0;
     animation: zoom 4s infinite;
 }
 
 p {
     color: #444;
-    font-size: 14.5px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
 /* Button */
 button {
-    margin-top: 15px;
-    padding: 12px 25px;
+    margin-top: 12px;
+    padding: 10px 22px;
     border: none;
     border-radius: 25px;
     background: #ff3d68;
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
 }
 
 /* Floating hearts */
 .heart {
     position: absolute;
-    font-size: 22px;
+    font-size: 20px;
     animation: float 6s linear infinite;
     color: #ff2f6d;
     z-index: 1;
@@ -87,13 +87,19 @@ button {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes zoom {
     0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+    50% { transform: scale(1.03); } /* slight zoom for mobile */
+    100% { transform: scale(1); }
+}
+
+@keyframes containerZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); } /* subtle zoom so background is visible */
     100% { transform: scale(1); }
 }
 
@@ -102,19 +108,16 @@ button {
     to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* EXTRA MOBILE POLISH */
+/* Mobile adjustments */
 @media (max-width: 480px) {
-    h1 {
-        font-size: 20px;
+    .container {
+        width: 90%;
+        padding: 16px;
     }
-
-    p {
-        font-size: 14px;
-    }
-
-    img {
-        max-height: 200px;
-    }
+    h1 { font-size: 18px; }
+    p { font-size: 13.5px; }
+    img { max-height: 180px; }
+    button { font-size: 14px; padding: 10px 20px; }
 }
 </style>
 </head>
@@ -173,12 +176,11 @@ let backgrounds = [
 
 let bgIndex = 0;
 setInterval(() => {
-    document.body.style.backgroundImage =
-        `url('${backgrounds[bgIndex]}')`;
+    document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
     bgIndex = (bgIndex + 1) % backgrounds.length;
 }, 5000);
 
-// MUSIC UNMUTE (Mobile Safe)
+// MUSIC UNMUTE
 window.onload = () => {
     setTimeout(() => {
         const music = document.getElementById("bgMusic");
@@ -193,12 +195,12 @@ setInterval(() => {
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    heart.style.fontSize = (Math.random() * 12 + 14) + "px";
     heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
     document.body.appendChild(heart);
 
     setTimeout(() => heart.remove(), 7000);
-}, 350);
+}, 400);
 
 // SURPRISE
 function surprise() {
